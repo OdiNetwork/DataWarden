@@ -3,6 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { Readable } from 'stream'
 import { listObjectsCommand, getObjectCommand } from './functions/s3'
+import { createBackup } from './functions/archiver'
 
 const BACKUP_DIR = './data/dist'
 const LOCAL_RECORD_FILE = './data/mapping/records.json'
@@ -16,12 +17,14 @@ function loadLocalRecord() {
   if (fs.existsSync(LOCAL_RECORD_FILE)) {
     return JSON.parse(fs.readFileSync(LOCAL_RECORD_FILE, 'utf8'))
   }
+
   return {}
 }
 
 function saveLocalRecord(record: Record<string, string>) {
   fs.writeFileSync(LOCAL_RECORD_FILE, JSON.stringify(record), 'utf8')
 }
+
 async function syncObjects(localRecord: Record<string, string>) {
   try {
     const data = await listObjectsCommand()
@@ -78,3 +81,4 @@ async function syncObjects(localRecord: Record<string, string>) {
 
 const localRecord = loadLocalRecord()
 syncObjects(localRecord)
+createBackup(BACKUP_DIR)
