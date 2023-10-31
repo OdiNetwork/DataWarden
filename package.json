@@ -1,0 +1,17 @@
+{
+  "name": "one-datawarden",
+  "version": "1.0.0",
+  "description": "Backup tool for S3 compatible services.",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.8.9",
+    "eslint": "^8.52.0",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  }
+}
